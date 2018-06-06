@@ -1,7 +1,25 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --system-libclang --clang-completer
+  endif
+endfunction
+
+
 call plug#begin('~/.vim/plugged')
+
+
 Plug 'flazz/vim-colorschemes'
 Plug 'jiangmiao/auto-pairs'
-Plug 'oblitum/YouCompleteMe'
+Plug 'oblitum/YouCompleteMe', { 'do': function('BuildYCM') }
     let g:ycm_always_populate_location_list = 1
     let g:ycm_autoclose_preview_window_after_insertion = 1
     "let g:ycm_goto_buffer_command = 'horizontal-split'
@@ -269,3 +287,4 @@ nnoremap <leader>fs  :Snippets<CR>
 nnoremap <leader>fco :Commits<CR>
 nnoremap <leader>fcb :BCommits<CR>
 nnoremap <leader>fw  :Windows<CR>
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
