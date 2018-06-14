@@ -259,7 +259,6 @@ nnoremap <C-L> :nohl<CR><C-L>
 vnoremap // y/<C-R>"<CR>
 let mapleader=' '
 au FocusLost * silent! wa
-au GUIEnter * simalt ~x
 set autowriteall
 nnoremap <leader>tt   :NERDTreeToggle<CR>
 " find current file in nerdtree
