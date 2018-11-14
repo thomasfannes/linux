@@ -14,7 +14,7 @@ echo auro_compiler: $auro_compiler
 export auro_compiler_brand=gcc
 export auro_compiler_arch=x64
 export auro_compiler_config=release
-export auro_compiler_options=
+export auro_compiler_options=-pic
 
 auro_notify
 function release {
@@ -47,10 +47,15 @@ export auro_compiler_config=debug
 auro_notify
 }
 
+function no_pic {
+    export auro_compiler_options=""
+    auro_notify
+} 
+
 function pic {
     export auro_compiler_options=-pic
     auro_notify
-} 
+}
 
 
 function x32 {
