@@ -14,7 +14,8 @@ echo auro_compiler: $auro_compiler
 export auro_compiler_brand=gcc
 export auro_compiler_arch=x64
 export auro_compiler_config=release
-export auro_compiler_options=-pic
+export auro_default_compiler_options=-pic-vlc
+export auro_compiler_options=$auro_default_compiler_options
 
 auro_notify
 function release {
@@ -33,7 +34,7 @@ auro_notify
 }
 
 function rtc {
-export auro_compiler_config=release_rtc
+export auro_compiler_config=release-rtc
 auro_notify
 }
 
@@ -48,15 +49,14 @@ auro_notify
 }
 
 function no_pic {
-    export auro_compiler_options=""
+    export auro_compiler_options=${auro_default_compiler_options}
     auro_notify
 } 
 
 function pic {
-    export auro_compiler_options=-pic
+    export auro_compiler_options=${auro_default_compiler_options}-pic
     auro_notify
 }
-
 
 function x32 {
 export auro_compiler_arch=x32
