@@ -1,28 +1,16 @@
-if has('python3')
-endif
-
+let g:pymode_python = 'python3'
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-function! BuildYCM(info)
-  " info is a dictionary with 3 fields
-  " - name:   name of the plugin
-  " - status: 'installed', 'updated', or 'unchanged'
-  " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --system-libclang --clang-completer
-  endif
-endfunction
-
 
 call plug#begin('~/.vim/plugged')
 
 
 Plug 'flazz/vim-colorschemes'
 Plug 'jiangmiao/auto-pairs'
-Plug 'oblitum/YouCompleteMe', { 'do': function('BuildYCM') }
+Plug 'valloric/YouCompleteMe'
     let g:ycm_always_populate_location_list = 1
     let g:ycm_autoclose_preview_window_after_insertion = 1
     "let g:ycm_goto_buffer_command = 'horizontal-split'
@@ -273,8 +261,8 @@ nnoremap <leader>yf   :YcmCompleter FixIt<CR>
 nnoremap <leader>ev   :tabnew $MYVIMRC<CR>
 " clang-format
 let g:clang_format_fallback_style='WebKit'
-noremap <C-K> :pyf /usr/share/clang/clang-format.py<cr>
-inoremap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<cr>
+noremap <C-K> :py3f /usr/share/clang/clang-format.py<cr>
+inoremap <C-K> <c-o>:py3f /usr/share/clang/clang-format.py<cr>
 "FZF
 " https              : //github.com/junegunn/fzf.vim#commands
 nnoremap <leader>fb  :Buffers<CR>
