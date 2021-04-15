@@ -7,7 +7,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-
 Plug 'flazz/vim-colorschemes'
 Plug 'jiangmiao/auto-pairs'
 Plug 'valloric/YouCompleteMe'
@@ -63,6 +62,7 @@ Plug 'dkprice/vim-easygrep'
     let g:EasyGrepSearchCurrentBufferDir=0
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
     if has('win32')
         let g:fzf_history_dir = '$HOME/.fzf_vim_history'
     else
@@ -234,6 +234,20 @@ set expandtab
 "set shiftwidth=4
 "set tabstop=4
  
+
+"" Set the tab width
+" Prevent vim from overwriting these settings when loading a ruby file
+let g:ruby_recommended_style=0
+let s:tabwidth=4
+" show existing tabs '\t' with 4 spaces width
+exec 'set tabstop='    .s:tabwidth
+" what is the number of spaces for 1 level of indentation, e.g. when shifting
+" a line with '>'
+exec 'set shiftwidth=' .s:tabwidth
+" using 'tab' in insert mode results in 4 spaces
+exec 'set softtabstop='.s:tabwidth
+" enable insert spaces on pressing `tab`
+set expandtab
  
 "------------------------------------------------------------
 " Mappings {{{1
