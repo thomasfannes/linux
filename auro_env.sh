@@ -11,10 +11,10 @@ echo auro_compiler: $auro_compiler
 
 
 #Some defaults
-export auro_compiler_brand=gcc
+export auro_compiler_brand=clang
 export auro_compiler_arch=x64
 export auro_compiler_config=release
-export auro_default_compiler_options=-pic-vlc
+export auro_default_compiler_options=-pic-vlc-use_mold
 export auro_compiler_options=$auro_default_compiler_options
 
 auro_notify
